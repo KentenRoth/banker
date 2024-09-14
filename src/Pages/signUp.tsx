@@ -1,19 +1,39 @@
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
+import instance from '../axios/axios';
 
 const Signup = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
+	const [username, setUsername] = useState('');
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log(email, password, confirmPassword);
+
+		try {
+			const response = await instance.post('/signup', {
+				email,
+				password,
+				username,
+			});
+
+			Cookies.set('accessToken', response.data.accessToken);
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	return (
 		<div className="signup">
 			<h1>Sign Up</h1>
 			<form onSubmit={handleSubmit}>
+				<input
+					type="text"
+					placeholder="Username"
+					value={username}
+					onChange={(e) => setUsername(e.target.value)}
+				/>
 				<input
 					type="email"
 					placeholder="Email"
