@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import instance from '../axios/axios';
 
@@ -7,6 +8,8 @@ const Signup = () => {
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [username, setUsername] = useState('');
+
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -18,7 +21,10 @@ const Signup = () => {
 				username,
 			});
 
-			Cookies.set('accessToken', response.data.accessToken);
+			if (response.status === 200) {
+				Cookies.set('accessToken', response.data.accessToken);
+				navigate('/');
+			}
 		} catch (error) {
 			console.error(error);
 		}

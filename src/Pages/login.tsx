@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 import instance from '../axios/axios';
 
 const Login = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
+	const navigate = useNavigate();
+
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		const response = await instance.post('/login', { username, password });
-		console.log(response);
+		if (response.status === 200) {
+			Cookies.set('accessToken', response.data.accessToken);
+			navigate('/');
+		}
 	};
 
 	return (
