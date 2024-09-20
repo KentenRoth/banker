@@ -1,16 +1,18 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import instance from '../axios/axios';
 
-import { Player, Game } from '../types';
+import { Player, Game, Requests } from '../types';
 
 type InitialState = {
 	games: Game[];
+	requests: Requests[];
 	loading: boolean;
 	error: string | null;
 };
 
 const initalState: InitialState = {
 	games: [],
+	requests: [],
 	loading: false,
 	error: null,
 };
@@ -41,7 +43,13 @@ export const gameSlice = createSlice({
 			state.error = action.error.message || null;
 		});
 	},
-	reducers: {},
+	reducers: {
+		createGame: (state, action: PayloadAction<Game>) => {
+			state.games.push(action.payload);
+		},
+	},
 });
+
+export const { createGame } = gameSlice.actions;
 
 export default gameSlice.reducer;
