@@ -15,3 +15,12 @@ export interface Player {
 	piece: string;
 	created_at: string;
 }
+
+export interface Requests {
+	id: number;
+	sending_player_id: number;
+	receiving_player_id: number;
+	request_type: string;
+	status: string;
+	created_at: string;
+}
