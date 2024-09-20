@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import instance from '../axios/axios';
+import useSendData from '../hooks/sendData';
 
 const Signup = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [username, setUsername] = useState('');
+	const { sendData, loading, error } = useSendData('/signup');
 
 	const navigate = useNavigate();
 
@@ -15,7 +16,7 @@ const Signup = () => {
 		e.preventDefault();
 
 		try {
-			const response = await instance.post('/signup', {
+			const response = await sendData({
 				email,
 				password,
 				username,
