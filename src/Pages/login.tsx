@@ -6,7 +6,7 @@ import useSendData from '../hooks/sendData';
 const Login = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	const { sendData, loading, error } = useSendData('/login'); // Adjusted to match the expected arguments
+	const { sendData, loading, error } = useSendData('/login');
 
 	const navigate = useNavigate();
 
