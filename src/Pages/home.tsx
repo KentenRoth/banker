@@ -28,6 +28,17 @@ const Home = () => {
 		}
 	};
 
+	const logoutAll = async () => {
+		try {
+			const response = await instance.post('/logout/all');
+			if (response.status === 200) {
+				Cookies.remove('accessToken');
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
 	const newGame = async () => {
 		try {
 			const response = await sendData({ name });
@@ -50,6 +61,7 @@ const Home = () => {
 			<button onClick={newGame}>Send</button>
 
 			<button onClick={logout}>Logout</button>
+			<button onClick={logoutAll}>Logout All</button>
 		</>
 	);
 };
