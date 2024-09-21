@@ -5,6 +5,8 @@ import { fetchMyGames } from '../features/gameSlice';
 import { useDispatch } from 'react-redux';
 import useSendData from '../hooks/sendData';
 import { createGame } from '../features/gameSlice';
+import instance from '../axios/axios';
+import Cookies from 'js-cookie';
 
 const Home = () => {
 	const dispatch = useDispatch<AppDispatch>();
@@ -14,6 +16,17 @@ const Home = () => {
 	useEffect(() => {
 		dispatch(fetchMyGames());
 	}, []);
+
+	const logout = async () => {
+		try {
+			const response = await instance.post('/logout');
+			if (response.status === 200) {
+				Cookies.remove('accessToken');
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	const newGame = async () => {
 		try {
@@ -35,6 +48,8 @@ const Home = () => {
 				onChange={(e) => setName(e.target.value)}
 			/>
 			<button onClick={newGame}>Send</button>
+
+			<button onClick={logout}>Logout</button>
 		</>
 	);
 };
