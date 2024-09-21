@@ -17,7 +17,7 @@ const initalState: InitialState = {
 	error: null,
 };
 
-export const fetchMyGames = createAsyncThunk('game/fetchMyGames', async () => {
+export const fetchMyGames = createAsyncThunk('games', async () => {
 	const response = await instance.get('/games');
 	return response.data;
 });
