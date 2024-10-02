@@ -11,7 +11,8 @@ import Cookies from 'js-cookie';
 const Home = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const [name, setName] = useState('');
-	const { sendData, loading, error } = useSendData('/games');
+	const [user, setUser] = useState('');
+	const { sendData, loading, error } = useSendData();
 
 	useEffect(() => {
 		dispatch(fetchMyGames());
@@ -41,9 +42,25 @@ const Home = () => {
 
 	const newGame = async () => {
 		try {
-			const response = await sendData({ name });
+			const response = await sendData('/games', { name });
 			if (response.status === 200) {
 				dispatch(createGame(response.data));
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	// only friends right now
+	const sendRequest = async () => {
+		try {
+			const response = await sendData('/requests', {
+				receiving_player: user,
+				request_type: 'friend',
+			});
+			console.log(response);
+			if (response.status === 200) {
+				setUser('');
 			}
 		} catch (error) {
 			console.error(error);
@@ -62,6 +79,13 @@ const Home = () => {
 
 			<button onClick={logout}>Logout</button>
 			<button onClick={logoutAll}>Logout All</button>
+
+			<input
+				type="text"
+				value={user}
+				onChange={(e) => setUser(e.target.value)}
+			></input>
+			<button onClick={sendRequest}>Send Request</button>
 		</>
 	);
 };

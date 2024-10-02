@@ -6,14 +6,14 @@ import useSendData from '../hooks/sendData';
 const Login = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	const { sendData, loading, error } = useSendData('/login');
+	const { sendData, loading, error } = useSendData();
 
 	const navigate = useNavigate();
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
-		const response = await sendData({ username, password });
+		const response = await sendData('/login', { username, password });
 		if (response.status === 200) {
 			Cookies.set('accessToken', response.data.accessToken);
 			navigate('/');

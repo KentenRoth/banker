@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import isntance from '../axios/axios';
 
-const useSendData = (url: string) => {
+const useSendData = () => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
-	const sendData = async (data: any) => {
+	const sendData = async (url: string, data: any) => {
 		setLoading(true);
 		setError(null);
-
 		try {
 			const response = await isntance.post(url, data);
 			return response;

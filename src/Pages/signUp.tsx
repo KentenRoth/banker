@@ -8,7 +8,7 @@ const Signup = () => {
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [username, setUsername] = useState('');
-	const { sendData, loading, error } = useSendData('/signup');
+	const { sendData, loading, error } = useSendData();
 
 	const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ const Signup = () => {
 		e.preventDefault();
 
 		try {
-			const response = await sendData({
+			const response = await sendData('/signup', {
 				email,
 				password,
 				username,
