@@ -1,18 +1,16 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import instance from '../axios/axios';
 
-import { Player, Game, Requests } from '../types';
+import { Player, Game } from '../types';
 
 type InitialState = {
 	games: Game[];
-	requests: Requests[];
 	loading: boolean;
 	error: string | null;
 };
 
 const initalState: InitialState = {
 	games: [],
-	requests: [],
 	loading: false,
 	error: null,
 };
