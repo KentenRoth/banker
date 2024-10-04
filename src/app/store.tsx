@@ -1,12 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import gameReducer from '../features/gameSlice';
-import requestSlice from '../features/requestSlice';
+import requestReducer from '../features/requestSlice';
+
+const rootReducer = combineReducers({
+	game: gameReducer,
+	request: requestReducer,
+});
 
 export const store = configureStore({
-	reducer: {
-		game: gameReducer,
-		request: requestSlice,
-	},
+	reducer: rootReducer,
 });
 
 export default store;
