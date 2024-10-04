@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import './sass/app.sass';
 
@@ -14,22 +14,24 @@ import { useEffect } from 'react';
 
 function App() {
 	const dispatch = useDispatch<AppDispatch>();
+	const location = useLocation();
+	console.log(location.pathname);
 
 	useEffect(() => {
-		dispatch(fetchMyGames());
-		dispatch(fetchRequests());
-	}, []);
+		if (location.pathname !== '/login' && location.pathname !== '/signup') {
+			dispatch(fetchMyGames());
+			dispatch(fetchRequests());
+		}
+	}, [location.pathname, dispatch]);
 
 	return (
 		<>
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/signup" element={<Signup />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/me" element={<Me />} />
-				</Routes>
-			</BrowserRouter>
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/signup" element={<Signup />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/me" element={<Me />} />
+			</Routes>
 		</>
 	);
 }

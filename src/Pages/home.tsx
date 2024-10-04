@@ -10,13 +10,15 @@ import Cookies from 'js-cookie';
 const Home = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const myGames = useSelector((state: RootState) => state.game);
+	const myRequests = useSelector((state: RootState) => state.request);
 	const [name, setName] = useState('');
 	const [user, setUser] = useState('');
 	const { sendData, loading, error } = useSendData();
 
 	useEffect(() => {
 		console.log(myGames);
-	}, [myGames]);
+		console.log(myRequests);
+	}, [myGames, myRequests]);
 
 	const logout = async () => {
 		try {
