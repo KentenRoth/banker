@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { AppDispatch } from '../app/store';
-import { fetchMyGames } from '../features/gameSlice';
-import { useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../app/store';
+import { useSelector, useDispatch } from 'react-redux';
 import useSendData from '../hooks/sendData';
 import { createGame } from '../features/gameSlice';
 import instance from '../axios/axios';
@@ -10,13 +9,14 @@ import Cookies from 'js-cookie';
 
 const Home = () => {
 	const dispatch = useDispatch<AppDispatch>();
+	const myGames = useSelector((state: RootState) => state.game);
 	const [name, setName] = useState('');
 	const [user, setUser] = useState('');
 	const { sendData, loading, error } = useSendData();
 
 	useEffect(() => {
-		dispatch(fetchMyGames());
-	}, []);
+		console.log(myGames);
+	}, [myGames]);
 
 	const logout = async () => {
 		try {
