@@ -7,6 +7,8 @@ import { createGame } from '../features/gameSlice';
 import instance from '../axios/axios';
 import Cookies from 'js-cookie';
 
+import Games from '../Components/Game/games';
+
 const Home = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const myGames = useSelector((state: RootState) => state.game);
@@ -88,6 +90,11 @@ const Home = () => {
 				onChange={(e) => setUser(e.target.value)}
 			></input>
 			<button onClick={sendRequest}>Send Request</button>
+			<div>
+				{myGames.games.map((game) => (
+					<Games games={game} />
+				))}
+			</div>
 		</>
 	);
 };

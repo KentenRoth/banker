@@ -3,6 +3,7 @@ export interface Game {
 	name: string;
 	created_by_id: number;
 	created_at: string;
+	players: Player[];
 }
 
 export interface Player {
@@ -14,6 +15,7 @@ export interface Player {
 	properties: string;
 	piece: string;
 	created_at: string;
+	username?: string;
 }
 
 export interface Requests {
