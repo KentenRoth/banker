@@ -92,7 +92,7 @@ const Home = () => {
 			<button onClick={sendRequest}>Send Request</button>
 			<div>
 				{myGames.games.map((game) => (
-					<Games games={game} />
+					<Games key={game.id} games={game} />
 				))}
 			</div>
 		</>
