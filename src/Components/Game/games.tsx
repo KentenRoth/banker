@@ -1,16 +1,17 @@
-import React from 'react';
 import { Game } from '../../types';
 
-interface Games {
+import Players from './players';
+
+interface GameProps {
 	games: Game;
 }
 
-const Games = (props: Games) => {
+const Games = (props: GameProps) => {
 	return (
 		<div>
 			<h4>{props.games.name}</h4>
 			{props.games.players.map((player) => (
-				<div key={player.id}>{player.username}</div>
+				<Players key={player.id} player={player} />
 			))}
 		</div>
 	);
