@@ -15,7 +15,6 @@ import { useEffect } from 'react';
 function App() {
 	const dispatch = useDispatch<AppDispatch>();
 	const location = useLocation();
-	console.log(location.pathname);
 
 	useEffect(() => {
 		if (location.pathname !== '/login' && location.pathname !== '/signup') {
