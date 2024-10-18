@@ -90,7 +90,7 @@ const Home = () => {
 				onChange={(e) => setUser(e.target.value)}
 			></input>
 			<button onClick={sendRequest}>Send Request</button>
-			<div>
+			<div className="games">
 				{myGames.games.map((game) => (
 					<Games key={game.id} games={game} />
 				))}

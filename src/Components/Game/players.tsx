@@ -6,10 +6,16 @@ interface PlayersProps {
 
 const Players = (props: PlayersProps) => {
 	return (
-		<div>
-			<p>User: {props.player.username} </p>
-			<p>Piece: {props.player.piece}</p>
-			<p>Money: {props.player.money}</p>
+		<div className="players-details">
+			<p className="players-details_user">
+				<span>User: </span> {props.player.username}{' '}
+			</p>
+			<p className="players-details_piece">
+				<span>Piece: </span> {props.player.piece}
+			</p>
+			<p className="players-details_money">
+				<span>Money: </span> {props.player.money}
+			</p>
 		</div>
 	);
 };
