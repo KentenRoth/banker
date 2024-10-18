@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import instance from '../axios/axios';
 
-import { Player, Game } from '../types';
+import { Game } from '../types';
 
 type InitialState = {
 	games: Game[];
